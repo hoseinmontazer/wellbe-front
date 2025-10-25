@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
 import AuthForm from "../components/AuthForm";
-
-export type AuthMode = "login" | "register";
+import { Heart } from "lucide-react";
+import type { AuthMode } from "@/PrivateRoutes";
 
 const AuthPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -15,32 +15,47 @@ const AuthPage = () => {
   }, [searchParams]);
 
   return (
-    <section className="flex flex-col justify-center gap-12 overflow-hidden md:flex-row-reverse">
-      {/* <div className="md:flex-2">
-        <img src={authLight} className="dark:hidden" alt="Auth image" />
-        <img src={authDark} className="hidden dark:block" alt="Auth image" />
-      </div> */}
-      <div className="flex-1">
-        <h1 className="text-xl font-bold">
-          {mode === "login" ? "login" : "register"}
-        </h1>
+    <div className="max-w-md mx-auto pb-16">
+      {/* Gradient header */}
+      <section className="bg-gradient-to-b from-pink-300 to-pink-500 text-white rounded-3xl p-6 shadow-md mt-8">
+        <div className="flex justify-between items-center">
+          <h2 className="text-2xl font-semibold">
+            {mode === "login" ? "Welcome Back 💕" : "Join Our Community 💕"}
+          </h2>
+          <Heart className="w-8 h-8 opacity-90" />
+        </div>
+        <p className="text-sm opacity-90 mt-2">
+          {mode === "login"
+            ? "Track your cycles and daily insights easily."
+            : "Create your account to start tracking your cycles."}
+        </p>
+      </section>
+
+      {/* Auth card */}
+      <section className="mt-6 bg-white dark:bg-gray-800 rounded-2xl p-6 shadow">
+        <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4 text-center">
+          {mode === "login" ? "Login to your account" : "Create an account"}
+        </h3>
+
         <AuthForm mode={mode} />
-        <div className="flex items-center gap-2">
-          <p className="text-sm">
-            {mode === "login" ? "are you not a member?" : "Are you a member?"}
+
+        <div className="flex items-center justify-center gap-2 mt-4">
+          <p className="text-sm text-gray-600 dark:text-gray-300">
+            {mode === "login"
+              ? "Don’t have an account?"
+              : "Already have an account?"}
           </p>
           <button
-            className="btn btn-soft btn-primary"
-            onClick={() => {
-              if (mode === "login") setSearchParams("mode=register");
-              else setSearchParams("mode=login");
-            }}
+            onClick={() =>
+              setSearchParams(`mode=${mode === "login" ? "register" : "login"}`)
+            }
+            className="text-pink-600 font-semibold hover:underline"
           >
-            {mode === "login" ? "register" : "login"}
+            {mode === "login" ? "Register" : "Login"}
           </button>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 };
 
