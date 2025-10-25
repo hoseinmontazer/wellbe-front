@@ -1,6 +1,12 @@
-import axios from "axios";
+import axios from "axios"
+import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
 
 export const axiosInstance = axios.create({
-    baseURL: "https://api-period.shirpala.ir",
-    withCredentials: true,
+  baseURL: "https://api-period.shirpala.ir",
+  withCredentials: true,
 })
