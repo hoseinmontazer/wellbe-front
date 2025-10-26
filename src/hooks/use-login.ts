@@ -3,7 +3,7 @@ import type { AxiosResponse } from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
 import useAuthStore from "../store/use-Auth-store";
-import type { AuthResponseModel, LoginPayloadModel } from "./types/auth-model";
+import type { AuthResponseModel, LoginPayloadModel } from "../types/auth-model";
 import { axiosInstance } from "../lib/utils";
 
 const useLogin = () => {

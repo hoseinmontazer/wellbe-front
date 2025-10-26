@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import type { AxiosResponse } from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
-import type { AuthResponseModel, RegisterPayloadModel } from "./types/auth-model";
+import type { AuthResponseModel, RegisterPayloadModel } from "../types/auth-model";
 import { axiosInstance } from "../lib/utils";
 import useAuthStore from "../store/use-Auth-store";
 

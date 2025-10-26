@@ -7,8 +7,13 @@ import {
   MenubarSeparator,
   MenubarTrigger,
 } from "./ui/menubar"
+import useLogout from "@/hooks/use-logout"
+import useAuthStore from "@/store/use-Auth-store"
 
 const Navbar = () => {
+  const logout = useLogout();
+  const id = useAuthStore((state) => state.id);
+
   return (
     <Menubar>
       <MenubarMenu>
@@ -25,16 +30,26 @@ const Navbar = () => {
             </NavLink>
           </MenubarItem>
           <MenubarSeparator />
-          <MenubarItem>
-            <NavLink to="/auth" className={({ isActive }) => isActive ? "text-blue-600 font-medium" : ""}>
-              Login
-            </NavLink>
-          </MenubarItem>
-          <MenubarItem>
-            <NavLink to="/profile" className={({ isActive }) => isActive ? "text-blue-600 font-medium" : ""}>
-              Profile
-            </NavLink>
-          </MenubarItem>
+          
+          {id ? (
+            <>
+              <MenubarItem>
+                <NavLink to="/profile" className={({ isActive }) => isActive ? "text-blue-600 font-medium" : ""}>
+                  Profile
+                </NavLink>
+              </MenubarItem>
+              <MenubarSeparator />
+              <MenubarItem onClick={() => logout.mutate()} className="cursor-pointer">
+                Logout
+              </MenubarItem>
+            </>
+          ) : (
+            <MenubarItem>
+              <NavLink to="/auth" className={({ isActive }) => isActive ? "text-blue-600 font-medium" : ""}>
+                Login
+              </NavLink>
+            </MenubarItem>
+          )}
         </MenubarContent>
       </MenubarMenu>
     </Menubar>
