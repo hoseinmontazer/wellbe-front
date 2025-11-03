@@ -15,7 +15,7 @@ const useLogin = () => {
       const res = await axiosInstance.post<
         LoginPayloadModel,
         AxiosResponse<AuthResponseModel>
-      >("/users/auth", payload);
+      >("/users/auth/jwt/create/", payload);
 
       setId(res.data._id);
       setUserName(res.data.username);

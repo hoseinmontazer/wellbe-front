@@ -16,7 +16,7 @@ const useRegister = () => {
       const res = await axiosInstance.post<
         RegisterPayloadModel,
         AxiosResponse<AuthResponseModel>
-      >("/users", payload);
+      >("/api/auth/users/", payload);
 
       setId(res.data._id);
       setUserName(res.data.username);
